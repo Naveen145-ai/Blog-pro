@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import NavBar from '../../components/NavBar/NavBar';
 import './Home.css';
 
@@ -7,13 +8,9 @@ const Home = () => {
 
   useEffect(() => {
     const fetchBlogs = async () => {
-      try {
-        const res = await fetch('http://localhost:9000/api/v1/get-blogs');
-        const data = await res.json();
-        setBlogs(data);
-      } catch (error) {
-        console.error('Error fetching blogs:', error);
-      }
+      const res = await fetch('http://localhost:9000/api/v1/get-blogs');
+      const data = await res.json();
+      setBlogs(data);
     };
 
     fetchBlogs();
@@ -23,13 +20,15 @@ const Home = () => {
     <>
       <NavBar />
 
-      <div className="blog-container">
+      <div className="blog-grid">
         {blogs.map((blog) => (
           <div className="blog-card" key={blog._id}>
-            <h3>{blog.title}</h3>
             <img src={blog.image} alt={blog.title} />
-            
-            <p>{blog.content.substring(0, 100)}...</p>
+            <h3>{blog.title}</h3>
+
+            <Link className="read-link" to={`/blog/${blog._id}`}>
+              Read More →
+            </Link>
           </div>
         ))}
       </div>
