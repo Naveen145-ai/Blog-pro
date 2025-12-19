@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-
+const cors = require('cors');
 
 const connectCloudinary = require('./config/cloudinary');
 const mongoDb = require('./config/mongoDb');
@@ -18,12 +18,18 @@ mongoDb();
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true
+}));
+
 app.use('/api/v1',addBlogRoute);
 app.use('/api/v1',getBlogRoute);
 app.use('/api/v1',signUpRoute);
 app.use('/api/v1',loginRoute);
 app.use('/api/v1', wishlistRoute); 
 app.use('/api/v1', blogRoute);
+
 app.listen(process.env.PORT,()=>{
     console.log(`server is running in the port ${process.env.PORT}`);
     
