@@ -12,7 +12,7 @@ const getBlogRoute = require('./routes/getBlogRoute');
 const signUpRoute = require('./routes/signUpRoute');
 const loginRoute = require('./routes/loginRoute'); 
 const wishlistRoute = require('./routes/wishListRoute');
-
+const blogRoute = require('./routes/blogRoute');
 connectCloudinary();
 mongoDb();      
 
@@ -23,7 +23,7 @@ app.use('/api/v1',getBlogRoute);
 app.use('/api/v1',signUpRoute);
 app.use('/api/v1',loginRoute);
 app.use('/api/v1', wishlistRoute); 
-
+app.use('/api/v1', blogRoute);
 app.listen(process.env.PORT,()=>{
     console.log(`server is running in the port ${process.env.PORT}`);
     
