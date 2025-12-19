@@ -4,7 +4,7 @@ const searchBlogs = async (req, res) => {
   try {
     const { q } = req.query;
 
-    // If no search text
+ 
     if (!q) {
       return res.status(400).json({ error: "Search query missing" });
     }
