@@ -12,7 +12,8 @@ const signUp = async (req, res) => {
       return res.status(400).json({ error: "User already exists" });
     }
 
-    const hashed = await bcrypt.hash(password, 10);
+    const hashed = await bcrypt.hash(password, 10);  // $2b$10$X8y9...KjHf9Zp
+
 
     const newUser = await User.create({
       name,
@@ -30,6 +31,7 @@ const signUp = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: false,
+      sameSite: "strict"
     
     });
 

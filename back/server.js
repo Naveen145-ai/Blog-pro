@@ -10,7 +10,9 @@ const cookieParser = require('cookie-parser');
 const addBlogRoute = require('./routes/addBlogRoute');
 const getBlogRoute = require('./routes/getBlogRoute');
 const signUpRoute = require('./routes/signUpRoute');
-const loginRoute = require('./routes/loginRoute');  
+const loginRoute = require('./routes/loginRoute'); 
+const wishlistRoute = require('./routes/wishListRoute');
+
 connectCloudinary();
 mongoDb();      
 
@@ -20,6 +22,7 @@ app.use('/api/v1',addBlogRoute);
 app.use('/api/v1',getBlogRoute);
 app.use('/api/v1',signUpRoute);
 app.use('/api/v1',loginRoute);
+app.use('/api/v1', wishlistRoute); 
 
 app.listen(process.env.PORT,()=>{
     console.log(`server is running in the port ${process.env.PORT}`);
