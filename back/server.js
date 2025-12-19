@@ -5,6 +5,7 @@ const app = express();
 const connectCloudinary = require('./config/cloudinary');
 const mongoDb = require('./config/mongoDb');
 require('dotenv').config({ path: './config/config.env' });
+const cookieParser = require('cookie-parser');
 
 const addBlogRoute = require('./routes/addBlogRoute');
 const getBlogRoute = require('./routes/getBlogRoute');
@@ -14,7 +15,7 @@ connectCloudinary();
 mongoDb();      
 
 app.use(express.json());
-
+app.use(cookieParser());
 app.use('/api/v1',addBlogRoute);
 app.use('/api/v1',getBlogRoute);
 app.use('/api/v1',signUpRoute);

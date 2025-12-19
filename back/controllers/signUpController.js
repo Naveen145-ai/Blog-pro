@@ -3,30 +3,45 @@ const User = require('../models/userModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET;
-const signUp = async (req,res) => {
-    try{
-        const {name,email,password} = req.body;
+const signUp = async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
 
-        const exits = await User.findOne({email});
+    const exists = await User.findOne({ email });
+    if (exists) {
+      return res.status(400).json({ error: "User already exists" });
+    }
 
-        if(exits){
-            return res.status(400).json({"User already exits":true});
-        }
+    const hashed = await bcrypt.hash(password, 10);
 
-        const hashed = await bcrypt.hash(password, 10);
+    const newUser = await User.create({
+      name,
+      email,
+      password: hashed
+    });
 
-        const newUser = new User({name,email,password:hashed});
+    const token = jwt.sign(
+      { id: newUser._id },
+      JWT_SECRET,
+      { expiresIn: "1h" }
+    );
 
-       
-    const token = jwt.sign({ id: newUser._id }, JWT_SECRET, { expiresIn: '1h' });
+   
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: false,
+    
+    });
 
-    res.status(201).json({ user: { name: newUser.name, email: newUser.email }, token });
+    res.status(201).json({
+      message: "Signup successful",
+      user: { name: newUser.name, email: newUser.email }
+    });
+
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+};
 
+module.exports = signUp;
 
-
-    }
-
-    module.exports = signUp;
