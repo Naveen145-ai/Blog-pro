@@ -26,7 +26,7 @@ const Home = () => {
             <img src={blog.image} alt={blog.title} />
             <h3>{blog.title}</h3>
 
-            <Link className="read-link" to={`/blog/${blog._id}`}>
+            <Link className="read-link" to={`/get-blog/${blog._id}`}>
               Read More →
             </Link>
           </div>

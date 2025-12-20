@@ -4,6 +4,8 @@ import Login from './pages/Login/Login';
 import Signup from './pages/SignUp/SignUp';
 import Wishlist from './pages/WishList/WishList';
 import CreateBlog from './pages/CreateBlog/CreateBlog';
+import BlogDetails from "./pages/BlogDetails/BlogDetails";
+
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/create-blog" element={<CreateBlog />}/>
+        <Route path="/get-blog/:id" element={<BlogDetails />} />
+
       </Routes>
     </BrowserRouter>
   );

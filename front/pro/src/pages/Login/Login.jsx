@@ -3,7 +3,13 @@ const Login = () => {
     <>
     
       <div className="home-content">
-        <h1>Blog Project</h1>
+      <label>Name:</label>
+      <input type="text" name="name" />
+      <br />
+      <label>Password:</label>    
+      <input type="password" name="password" />
+      <br />
+      <button type="submit">Login</button>  
       </div>
     </>
   );
