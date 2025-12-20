@@ -84,4 +84,5 @@
 
 .switch-text a:hover {
   text-decoration: underline;
+  color: green;
 }
