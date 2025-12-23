@@ -7,15 +7,8 @@ const auth = require('../middlewares/auth');
 
 const addBlog = require('../controllers/addBlogController');
 
-// Configure multer for file uploads
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads/'); // Temporary storage directory
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname));
-    }
-});
+// Configure multer for file uploads (in-memory to avoid filesystem issues)
+const storage = multer.memoryStorage();
 
 const upload = multer({
     storage: storage,

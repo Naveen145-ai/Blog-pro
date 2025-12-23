@@ -1,32 +1,33 @@
 const Blog = require('../models/addBlogModel');
 const cloudinary = require('cloudinary').v2;
-const fs = require('fs');
+const { Readable } = require('stream');
 
 const addBlog = async(req, res) => {
     try {
         const { title, content } = req.body;
         let imageUrl = '';
 
-        // Handle file upload to Cloudinary if file exists
-        if (req.file) {
-            try {
-                const result = await cloudinary.uploader.upload(req.file.path, {
-                    folder: 'blogs',
-                    resource_type: 'auto'
-                });
-                imageUrl = result.secure_url;
-
-                // Clean up temporary file
-                fs.unlinkSync(req.file.path);
-            } catch (uploadErr) {
-                // Clean up temporary file on error
-                if (req.file && fs.existsSync(req.file.path)) {
-                    fs.unlinkSync(req.file.path);
-                }
-                return res.status(400).json({ "Error": "Image upload failed: " + uploadErr.message });
-            }
-        } else {
+        // Handle file upload to Cloudinary if file exists (multer memoryStorage)
+        if (!req.file || !req.file.buffer) {
             return res.status(400).json({ "Error": "No image file provided" });
+        }
+
+        try {
+            const result = await new Promise((resolve, reject) => {
+                const uploadStream = cloudinary.uploader.upload_stream(
+                    { folder: 'blogs', resource_type: 'auto' },
+                    (err, uploaded) => {
+                        if (err) return reject(err);
+                        return resolve(uploaded);
+                    }
+                );
+
+                Readable.from(req.file.buffer).pipe(uploadStream);
+            });
+
+            imageUrl = result.secure_url;
+        } catch (uploadErr) {
+            return res.status(400).json({ "Error": "Image upload failed: " + uploadErr.message });
         }
 
         if (!title || !imageUrl || !content) {
@@ -44,10 +45,6 @@ const addBlog = async(req, res) => {
         res.status(200).json({ "Blog Added Successfully": newBlog });
 
     } catch(err) {
-        // Clean up temporary file on error
-        if (req.file && fs.existsSync(req.file.path)) {
-            fs.unlinkSync(req.file.path);
-        }
         res.status(500).json({ "Error": err.message });
     }
 }
