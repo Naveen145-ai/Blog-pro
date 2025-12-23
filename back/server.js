@@ -15,6 +15,7 @@ const authRoute = require('./routes/authRoute');
 const myBlogsRoute = require('./routes/myBlogsRoute');
 const wishlistRoute = require('./routes/wishListRoute');
 const blogRoute = require('./routes/blogRoute');
+const commentRoute = require('./routes/commentRoute');
 connectCloudinary();
 mongoDb();      
 
@@ -36,6 +37,7 @@ app.use('/api/v1', authRoute);
 app.use('/api/v1', myBlogsRoute);
 app.use('/api/v1', wishlistRoute); 
 app.use('/api/v1', blogRoute);
+app.use('/api/v1', commentRoute);
 
 app.listen(process.env.PORT,()=>{
     console.log(`server is running in the port ${process.env.PORT}`);
