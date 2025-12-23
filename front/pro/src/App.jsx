@@ -8,6 +8,7 @@ import BlogDetails from "./pages/BlogDetails/BlogDetails";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Profile from "./pages/Profile/Profile";
 import ProfileHistory from "./pages/ProfileHistory/ProfileHistory";
+import SearchResults from "./pages/SearchResults/SearchResults";
 
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
           }
         />
         <Route path="/get-blog/:id" element={<BlogDetails />} />
+        <Route path="/search" element={<SearchResults />} />
 
       </Routes>
     </BrowserRouter>

@@ -6,6 +6,7 @@ const NavBar = () => {
   const [isAuthed, setIsAuthed] = useState(false);
   const [user, setUser] = useState(null);
   const [open, setOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
 
@@ -62,6 +63,13 @@ const NavBar = () => {
     }
   };
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (!searchQuery.trim()) return;
+    navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+    setSearchQuery('');
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-center">
@@ -69,6 +77,19 @@ const NavBar = () => {
         <Link to="/wishlist">Wishlist</Link>
         <Link to="/create-blog">Create Blog</Link>
       </div>
+
+      <form className="search-form" onSubmit={handleSearch}>
+        <input
+          type="search"
+          className="search-input"
+          placeholder="Search blogs..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <button type="submit" className="search-btn">
+          🔍
+        </button>
+      </form>
 
       <div className="navbar-right" ref={dropdownRef}>
         {isAuthed ? (

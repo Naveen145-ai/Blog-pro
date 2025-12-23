@@ -22,6 +22,51 @@
   gap: 20px;
 }
 
+.search-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 20px;
+}
+
+.search-input {
+  padding: 6px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  font-size: 14px;
+  min-width: 200px;
+  transition: all 0.3s ease;
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #00bcd4;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 8px rgba(0, 188, 212, 0.3);
+}
+
+.search-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.search-btn:hover {
+  border-color: #00bcd4;
+  color: #00bcd4;
+}
+
 .navbar-right {
   position: relative;
   display: flex;
