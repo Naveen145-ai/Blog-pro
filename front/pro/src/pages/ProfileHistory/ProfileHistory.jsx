@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar";
 import "./ProfileHistory.css";
 
@@ -61,7 +62,7 @@ const ProfileHistory = () => {
   return (
     <>
       <NavBar />
-      <div className="profile-history">
+      <div className={`profile-history ${!loading && !error && blogs.length === 0 ? "empty-mode" : ""}`}>
         <div className="profile-history-header">
           <h1 className="profile-history-title">Profile History</h1>
           <button className="refresh-btn" type="button" onClick={load}>
@@ -73,7 +74,10 @@ const ProfileHistory = () => {
         {error && !loading && <p className="error-text">{error}</p>}
 
         {!loading && !error && blogs.length === 0 && (
-          <p className="status-text">No blogs uploaded yet.</p>
+          <div className="empty-profile">
+            <p className="empty-text">No blogs uploaded yet.</p>
+            <Link to="/" className="back-home-btn">Explore Blogs</Link>
+          </div>
         )}
 
         {!loading && !error && blogs.length > 0 && (

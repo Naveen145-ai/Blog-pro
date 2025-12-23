@@ -54,6 +54,38 @@
   color: #00bcd4;
 }
 
+/* Move logout 10px left from the right edge */
+.logout-btn {
+  margin-right: 10px;
+}
+
+/* Profile: rectangle container with a circular avatar inside */
+.profile-rect {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+.profile-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #00bcd4;
+  color: #07121a;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.profile-text {
+  color: #fff;
+  font-size: 14px;
+}
+
 .profile-dropdown {
   position: absolute;
   right: 0;

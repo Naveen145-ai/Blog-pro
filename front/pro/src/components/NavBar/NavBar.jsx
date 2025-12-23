@@ -75,10 +75,15 @@ const NavBar = () => {
           <>
             <button
               type="button"
-              className="navbar-btn"
+              className="navbar-btn profile-btn"
               onClick={() => setOpen((v) => !v)}
             >
-              Profile
+              <div className="profile-rect">
+                <div className="profile-circle">
+                  {user?.name ? user.name.charAt(0).toUpperCase() : 'U'}
+                </div>
+                <span className="profile-text">Profile</span>
+              </div>
             </button>
 
             {open && (
@@ -105,7 +110,7 @@ const NavBar = () => {
               </div>
             )}
 
-            <button type="button" className="navbar-btn" onClick={handleLogout}>
+            <button type="button" className="navbar-btn logout-btn" onClick={handleLogout}>
               Logout
             </button>
           </>
