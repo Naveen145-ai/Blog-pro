@@ -37,7 +37,8 @@ const addBlog = async(req, res) => {
         const newBlog = new Blog({
             title,
             image: imageUrl,
-            content
+            content,
+            author: req.userId
         });
 
         await newBlog.save();

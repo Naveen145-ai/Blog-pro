@@ -39,6 +39,28 @@ const WishList = () => {
     fetchWishlist();
   }, [navigate]);
 
+  const handleRemove = async (id) => {
+    const ok = window.confirm("Remove this blog from wishlist?");
+    if (!ok) return;
+
+    try {
+      const res = await fetch(`http://localhost:9000/api/v1/wishlist/${id}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        alert(data?.error || "Failed to remove from wishlist");
+        return;
+      }
+
+      setWishlistBlogs((prev) => prev.filter((b) => b._id !== id));
+    } catch (e) {
+      alert(e.message || "Failed to remove from wishlist");
+    }
+  };
+
   return (
     <>
       <NavBar />
@@ -68,9 +90,14 @@ const WishList = () => {
                 <h3>{blog.title}</h3>
                 <p className="blog-preview">{blog.content?.substring(0, 100)}...</p>
 
-                <Link className="read-link" to={`/get-blog/${blog._id}`}>
-                  Read More →
-                </Link>
+                <div className="wishlist-actions">
+                  <Link className="read-link" to={`/get-blog/${blog._id}`}>
+                    Read More →
+                  </Link>
+                  <button type="button" className="delete-btn" onClick={() => handleRemove(blog._id)}>
+                    Remove
+                  </button>
+                </div>
               </div>
             ))}
           </div>

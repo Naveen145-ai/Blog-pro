@@ -1,0 +1,91 @@
+.profile-history {
+  max-width: 1100px;
+  margin: 30px auto;
+  padding: 0 16px;
+}
+
+.profile-history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.profile-history-title {
+  margin: 0;
+}
+
+.status-text {
+  text-align: center;
+}
+
+.error-text {
+  text-align: center;
+  color: crimson;
+}
+
+.refresh-btn {
+  background: #111;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.refresh-btn:hover {
+  border-color: #00bcd4;
+  color: #00bcd4;
+}
+
+.myblogs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.myblog-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.myblog-image img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.myblog-body {
+  padding: 12px;
+}
+
+.myblog-title {
+  margin: 0 0 8px 0;
+}
+
+.myblog-preview {
+  margin: 0 0 12px 0;
+  color: #444;
+  font-size: 14px;
+}
+
+.myblog-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.delete-btn {
+  border: 1px solid rgba(220, 20, 60, 0.35);
+  background: rgba(220, 20, 60, 0.08);
+  color: crimson;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  border-color: crimson;
+}

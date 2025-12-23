@@ -7,6 +7,7 @@ import CreateBlog from './pages/CreateBlog/CreateBlog';
 import BlogDetails from "./pages/BlogDetails/BlogDetails";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Profile from "./pages/Profile/Profile";
+import ProfileHistory from "./pages/ProfileHistory/ProfileHistory";
 
 
 function App() {
@@ -30,6 +31,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile-history"
+          element={
+            <ProtectedRoute>
+              <ProfileHistory />
             </ProtectedRoute>
           }
         />

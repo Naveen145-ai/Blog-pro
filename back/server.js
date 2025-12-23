@@ -12,6 +12,7 @@ const getBlogRoute = require('./routes/getBlogRoute');
 const signUpRoute = require('./routes/signUpRoute');
 const loginRoute = require('./routes/loginRoute'); 
 const authRoute = require('./routes/authRoute');
+const myBlogsRoute = require('./routes/myBlogsRoute');
 const wishlistRoute = require('./routes/wishListRoute');
 const blogRoute = require('./routes/blogRoute');
 connectCloudinary();
@@ -32,6 +33,7 @@ app.use('/api/v1',getBlogRoute);
 app.use('/api/v1',signUpRoute);
 app.use('/api/v1',loginRoute);
 app.use('/api/v1', authRoute);
+app.use('/api/v1', myBlogsRoute);
 app.use('/api/v1', wishlistRoute); 
 app.use('/api/v1', blogRoute);
 
