@@ -18,7 +18,8 @@ const signUp = async (req, res) => {
     const newUser = await User.create({
       name,
       email,
-      password: hashed
+      password: hashed,
+      lastLoginAt: new Date()
     });
 
     const token = jwt.sign(
@@ -31,8 +32,8 @@ const signUp = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: false,
-      sameSite: "strict"
-    
+      sameSite: "lax",
+      path: '/'
     });
 
     res.status(201).json({

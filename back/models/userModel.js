@@ -8,6 +8,9 @@ createdAt: {
     type: Date,
     default: Date.now
   },
+  lastLoginAt: {
+    type: Date
+  },
   wishlist: [
     {
       type: mongoose.Schema.Types.ObjectId,

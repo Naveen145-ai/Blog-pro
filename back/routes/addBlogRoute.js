@@ -3,6 +3,8 @@ const router = express.Router();
 const multer = require('multer');
 const path = require('path');
 
+const auth = require('../middlewares/auth');
+
 const addBlog = require('../controllers/addBlogController');
 
 // Configure multer for file uploads
@@ -28,6 +30,6 @@ const upload = multer({
     }
 });
 
-router.post('/add-blog', upload.single('image'), addBlog);
+router.post('/add-blog', auth, upload.single('image'), addBlog);
 
 module.exports = router;

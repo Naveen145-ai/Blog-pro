@@ -110,6 +110,7 @@ const CreateBlog = () => {
       const response = await fetch("http://localhost:9000/api/v1/add-blog", {
         method: "POST",
         body: formDataToSend,
+        credentials: "include",
         // DO NOT set Content-Type header - browser will set it with correct boundary
       });
 

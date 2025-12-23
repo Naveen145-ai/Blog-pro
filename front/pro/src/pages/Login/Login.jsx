@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Login.css";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [formData, setFormData] = useState({
-    name: "",
+    email: "",
     password: ""
   });
 
@@ -24,11 +26,17 @@ const Login = () => {
         headers: {
           "Content-Type": "application/json"
         },
+        credentials: "include",
         body: JSON.stringify(formData)
       });
 
       const data = await res.json();
       alert(data.message || "Login successful");
+
+      if (res.ok) {
+        const to = location.state?.from || "/";
+        navigate(to);
+      }
     } catch (err) {
       alert("Login failed");
     }
@@ -37,8 +45,8 @@ const Login = () => {
   return (
     <div className="home-content">
       <div className="login-box">
-        <label>Name:</label>
-        <input type="text" name="name" onChange={handleChange} />
+        <label>Email:</label>
+        <input type="email" name="email" onChange={handleChange} />
 
         <label>Password:</label>
         <input type="password" name="password" onChange={handleChange} />

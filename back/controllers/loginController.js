@@ -24,11 +24,15 @@ const login = async (req, res) => {
       { expiresIn: "1h" }
     );
 
+    user.lastLoginAt = new Date();
+    await user.save();
+   
    
     res.cookie("token", token, {
       httpOnly: true,
       secure: false,
-      sameSite: 'lax'
+      sameSite: 'lax',
+      path: '/'
     });
 
     res.status(200).json({

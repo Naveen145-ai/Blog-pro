@@ -5,6 +5,8 @@ import Signup from './pages/SignUp/SignUp';
 import Wishlist from './pages/WishList/WishList';
 import CreateBlog from './pages/CreateBlog/CreateBlog';
 import BlogDetails from "./pages/BlogDetails/BlogDetails";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Profile from "./pages/Profile/Profile";
 
 
 function App() {
@@ -15,7 +17,22 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/create-blog" element={<CreateBlog />}/>
+        <Route
+          path="/create-blog"
+          element={
+            <ProtectedRoute>
+              <CreateBlog />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/get-blog/:id" element={<BlogDetails />} />
 
       </Routes>
